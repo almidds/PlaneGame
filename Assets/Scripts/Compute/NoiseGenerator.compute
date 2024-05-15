@@ -1,0 +1,40 @@
+// Samples from a noise map based on chunk position
+// to generate an array of numbers between 0 and 1
+
+#pragma kernel GenerateNoise
+
+#include "Includes\ChunkData.compute"
+#include "Includes\FastNoiseLite.compute"
+
+RWStructuredBuffer<float> _weights;
+
+// Noise parameters
+int seed;
+int octaves;
+float noiseScale;
+float lacunarity;
+float gain;
+float amplitude;
+
+[numthreads(numThreads, numThreads, numThreads)]
+void GenerateNoise (uint3 id : SV_DispatchThreadID) {
+    if (id.x >= numPointsPerAxis || id.y >= numPointsPerAxis || id.z >= numPointsPerAxis) {
+        return;
+    }
+
+    float3 pos = chunkCentre + float3(id) * pointSpacing();
+
+    fnl_state noise = fnlCreateState();
+    noise.seed = seed;
+    noise.noise_type = FNL_NOISE_OPENSIMPLEX2;
+    noise.fractal_type = FNL_FRACTAL_RIDGED;
+    float _frequency = noiseScale / 100;
+    noise.octaves = octaves;
+    noise.frequency = _frequency;
+    noise.lacunarity = lacunarity;
+    noise.gain = gain;
+
+    float n = fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * amplitude;
+    _weights[indexFromCoord(id.x, id.y, id.z)] = n;
+}
+

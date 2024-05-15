@@ -7,8 +7,8 @@ public class Chunk : MonoBehaviour {
     float[] _weights;
     
     public void GenerateMap() {
-        TerrainGenerator terrainGenerator = gameObject.GetComponent<TerrainGenerator>();
-        _weights = terrainGenerator.GetTerrain();
+        NoiseGenerator terrainGenerator = gameObject.GetComponent<NoiseGenerator>();
+        _weights = terrainGenerator.GenerateNoise(transform.position);
     }
 
     private void OnDrawGizmos() {

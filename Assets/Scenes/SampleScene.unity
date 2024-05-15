@@ -339,7 +339,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79137cc72db713944b57f4481c8de28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainGenerator: {fileID: 7200000, guid: b6eff84e4d35bdf40ba992709fdf7b00, type: 3}
+  noiseGenerator: {fileID: 7200000, guid: b6eff84e4d35bdf40ba992709fdf7b00, type: 3}
+  seed: 13
+  numOctaves: 4
+  noiseScale: 1
+  lacunarity: 2
+  gain: 0.5
+  amplitude: 1
 --- !u!114 &994453056
 MonoBehaviour:
   m_ObjectHideFlags: 0
