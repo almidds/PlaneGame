@@ -21,7 +21,7 @@ public class Chunk : MonoBehaviour {
                     int index = x + TerrainMetrics.PointsPerChunk * (y + TerrainMetrics.PointsPerChunk * z);
                     float noiseValue = _weights[index];
                     Gizmos.color = Color.Lerp(Color.black, Color.white, noiseValue);
-                    Gizmos.DrawCube(new Vector3(x, y, z), Vector3.one * .2f);
+                    Gizmos.DrawCube(new Vector3(transform.position.x + TerrainMetrics.PointSpacing * x, transform.position.y + TerrainMetrics.PointSpacing * y, transform.position.z +  TerrainMetrics.PointSpacing * z), Vector3.one * .2f);
                 }
             }
         }
