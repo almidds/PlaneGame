@@ -1,0 +1,32 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    merge_group:
+
+concurrency:
+  group: checks-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      lint_cs: ${{ steps.filter.lint_cs }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            cs:
+              - '**/*.cs'
+  
+  linting:
+    needs: changes
+    uses: "./.github/workflows/checks.yaml"
+    with:
+      lint_cs: ${{ needs.changes.outputs.lint_cs == 'true' }}
