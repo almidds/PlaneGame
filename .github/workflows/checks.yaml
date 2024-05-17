@@ -20,9 +20,5 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: Debug
-        run: ls -la
-      - name: Install dependencies
-        run: dotnet restore Assembly-CSharp.csproj
       - name: Run linters
-        run: dotnet format Assembly-CSharp.csproj --verify-no-changes
+        run: dotnet format whitespace --folder --verify-no-changes
