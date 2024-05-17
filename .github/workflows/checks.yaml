@@ -21,6 +21,6 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore Assembly-CSharp.csproj
       - name: Run linters
-        run: dotnet format --check
+        run: dotnet format Assembly-CSharp.csproj --verify-no-changes
