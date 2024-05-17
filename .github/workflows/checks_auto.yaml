@@ -22,8 +22,8 @@ jobs:
         id: filter
         with:
           filters: |
-            cs:
-              - '**/*.cs'
+            lint_cs:
+              - '**.cs'
   
   linting:
     needs: changes
