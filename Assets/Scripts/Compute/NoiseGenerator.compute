@@ -1,9 +1,6 @@
-// Samples from a noise map based on chunk position
-// to generate an array of numbers between 0 and 1
-
 #pragma kernel GenerateNoise
 
-#include "Includes\ChunkData.compute"
+#include "Includes\ChunkData.hlsl"
 #include "Includes\FastNoiseLite.compute"
 
 RWStructuredBuffer<float> _weights;

@@ -1,12 +1,11 @@
 static const uint numThreads = 8;
 
-// Generic chunk information
-
 // Number of points in each direction for a single chunk
-uint numPointsPerAxis;
+int numPointsPerAxis;
 
 // Size of a single chunk
 float chunkSize;
+float isoLevel;
 
 float pointSpacing() {
     return chunkSize / (numPointsPerAxis - 1);

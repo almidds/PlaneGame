@@ -19,16 +19,6 @@ public class NoiseGenerator : MonoBehaviour
     public float gain = 0.5f;
     public float amplitude = 1;
 
-    protected List<ComputeBuffer> buffersToRelease;
-
-
-    void ReleaseBuffers() {
-        if (buffersToRelease != null) {
-            foreach(var buffer in buffersToRelease) {
-                buffer.Release();
-            }
-        }
-    }
 
     public float[] GenerateNoise(Vector3 position) {
         _weightsBuffer = new ComputeBuffer (
