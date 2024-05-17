@@ -4,8 +4,8 @@ on:
   workflow_call:
     inputs:
       lint_cs:
-        required: true
         type: boolean
+        required: true
 
 env:
   DOTNET_VERSION: '8.x'

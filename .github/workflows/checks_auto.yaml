@@ -15,7 +15,7 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      lint_cs: ${{ steps.filter.lint_cs }}
+      lint_cs: ${{ steps.filter.outsputs.lint_cs }}
     steps:
       - uses: actions/checkout@v3
       - uses: dorny/paths-filter@v2
