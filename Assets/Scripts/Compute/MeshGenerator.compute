@@ -60,9 +60,9 @@ void GenerateMesh (uint3 id : SV_DispatchThreadID) {
         int e21 = edgeConnections[edges[i + 2]][1];
 
         Triangle tri;
-        tri.v0 = interp(cornerOffsets[e00], cubeValues[e00], cornerOffsets[e01], cubeValues[e01]) + id;
-        tri.v1 = interp(cornerOffsets[e10], cubeValues[e10], cornerOffsets[e11], cubeValues[e11]) + id;
-        tri.v2 = interp(cornerOffsets[e20], cubeValues[e20], cornerOffsets[e21], cubeValues[e21]) + id;
+        tri.v0 = pointSpacing() * (interp(cornerOffsets[e00], cubeValues[e00], cornerOffsets[e01], cubeValues[e01]) + id);
+        tri.v1 = pointSpacing() * (interp(cornerOffsets[e10], cubeValues[e10], cornerOffsets[e11], cubeValues[e11]) + id);
+        tri.v2 = pointSpacing() * (interp(cornerOffsets[e20], cubeValues[e20], cornerOffsets[e21], cubeValues[e21]) + id);
 
         triangles.Append(tri);
     }

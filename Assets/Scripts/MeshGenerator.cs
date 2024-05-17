@@ -41,8 +41,8 @@ public class MeshGenerator : MonoBehaviour
 
     public Mesh ConstructMesh(float[] points) {
         trianglesBuffer = new ComputeBuffer(5 * TerrainMetrics.PointsPerChunk
-                                                * TerrainMetrics.PointsPerChunk
-                                                * TerrainMetrics.PointsPerChunk,
+                                              * TerrainMetrics.PointsPerChunk
+                                              * TerrainMetrics.PointsPerChunk,
                                             Triangle.SizeOf,
                                             ComputeBufferType.Append);
         trianglesCountBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
@@ -58,6 +58,7 @@ public class MeshGenerator : MonoBehaviour
         meshGenerator.SetBuffer(0, "points", pointsBuffer);
 
         meshGenerator.SetInt("numPointsPerAxis", TerrainMetrics.PointsPerChunk);
+        meshGenerator.SetFloat("chunkSize", TerrainMetrics.ChunkSize);
         meshGenerator.SetFloat("isoLevel", 0.5f);
 
         pointsBuffer.SetData(points);

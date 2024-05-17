@@ -8,7 +8,7 @@ float chunkSize;
 float isoLevel;
 
 float pointSpacing() {
-    return chunkSize / (numPointsPerAxis - 1);
+    return chunkSize / (float) (numPointsPerAxis - 1);
 }
 
 int indexFromCoord(int x, int y, int z) {
