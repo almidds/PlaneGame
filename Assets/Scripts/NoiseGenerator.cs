@@ -10,7 +10,7 @@ public class NoiseGenerator : MonoBehaviour
     ComputeBuffer _weightsBuffer;
 
     [SerializeField]
-    private readonly ComputeShader noiseGenerator;
+    private ComputeShader noiseGenerator;
 
     [Header("Noise")]
     public int seed;

@@ -7,7 +7,7 @@ using UnityEngine;
 public class MeshGenerator : MonoBehaviour
 {
     [SerializeField]
-    private readonly ComputeShader meshGenerator;
+    private ComputeShader meshGenerator;
 
     protected List<ComputeBuffer> buffersToRelease;
     protected List<ComputeBuffer> buffersToCreate;
@@ -75,6 +75,8 @@ public class MeshGenerator : MonoBehaviour
                                     TerrainMetrics.PointsPerChunk / TerrainMetrics.NumThreads);
         Triangle[] tris = new Triangle[ReadTriangleCount()];
         trianglesBuffer.GetData(tris);
+
+        ReleaseBuffers();
 
         return CreateMeshFromTriangles(tris);
     }

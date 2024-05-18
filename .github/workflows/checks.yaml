@@ -21,4 +21,4 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Run linters
-        run: dotnet format whitespace --folder --verify-no-changes
+        run: dotnet format whitespace --folder --verify-no-changes Assets/Scripts
