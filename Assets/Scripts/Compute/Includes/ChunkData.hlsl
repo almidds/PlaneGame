@@ -6,6 +6,7 @@ int numPointsPerAxis;
 // Size of a single chunk
 float chunkSize;
 float isoLevel;
+float3 offset;
 
 float pointSpacing() {
     return chunkSize / (float) (numPointsPerAxis - 1);

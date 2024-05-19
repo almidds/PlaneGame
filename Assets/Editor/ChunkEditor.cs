@@ -13,7 +13,9 @@ public class ChunkEditor : Editor
         Chunk chunk = (Chunk)target;
         if (DrawDefaultInspector())
         {
-            chunk.GenerateMap();
+            if (chunk.autoUpdate) {
+                chunk.GenerateMap();
+            }
         }
         if (GUILayout.Button("Generate"))
         {

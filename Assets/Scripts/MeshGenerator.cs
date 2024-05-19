@@ -66,7 +66,7 @@ public class MeshGenerator : MonoBehaviour
 
         meshGenerator.SetInt("numPointsPerAxis", TerrainMetrics.PointsPerChunk);
         meshGenerator.SetFloat("chunkSize", TerrainMetrics.ChunkSize);
-        meshGenerator.SetFloat("isoLevel", 0.5f);
+        meshGenerator.SetFloat("isoLevel", -0.1f);
 
         pointsBuffer.SetData(points);
         trianglesBuffer.SetCounterValue(0);
