@@ -1,6 +1,7 @@
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class NoiseGenerator : MonoBehaviour
@@ -11,7 +12,7 @@ public class NoiseGenerator : MonoBehaviour
     [SerializeField]
     private ComputeShader noiseGenerator;
 
-    [Header ("Noise")]
+    [Header("Noise")]
     public int seed;
     public int numOctaves = 4;
     public float noiseScale = 1;
@@ -20,8 +21,9 @@ public class NoiseGenerator : MonoBehaviour
     public float amplitude = 1;
 
 
-    public float[] GenerateNoise(Vector3 position) {
-        _weightsBuffer = new ComputeBuffer (
+    public float[] GenerateNoise(Vector3 position)
+    {
+        _weightsBuffer = new ComputeBuffer(
             TerrainMetrics.PointsPerChunk *
             TerrainMetrics.PointsPerChunk *
             TerrainMetrics.PointsPerChunk,
@@ -45,7 +47,7 @@ public class NoiseGenerator : MonoBehaviour
                                 TerrainMetrics.PointsPerChunk / TerrainMetrics.NumThreads,
                                 TerrainMetrics.PointsPerChunk / TerrainMetrics.NumThreads,
                                 TerrainMetrics.PointsPerChunk / TerrainMetrics.NumThreads);
-        float[] noiseValues = new float[TerrainMetrics.PointsPerChunk * 
+        float[] noiseValues = new float[TerrainMetrics.PointsPerChunk *
                                         TerrainMetrics.PointsPerChunk *
                                         TerrainMetrics.PointsPerChunk];
         _weightsBuffer.GetData(noiseValues);
