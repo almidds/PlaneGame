@@ -1,7 +1,7 @@
 #pragma kernel GenerateMesh
 
 #include "Includes\ChunkData.hlsl"
-#include "Includes\MarchingTable.compute"
+#include "Includes\MarchingTable.hlsl"
 
 
 struct Triangle {
