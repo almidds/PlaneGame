@@ -1,17 +1,23 @@
 #pragma kernel GenerateNoise
 
 #include "Includes\ChunkData.hlsl"
-#include "Includes\FastNoiseLite.compute"
+#include "Includes\Noise.compute"
 
 RWStructuredBuffer<float> _weights;
+StructuredBuffer<float3> offsets;
 
-// Noise parameters
-int seed;
-int octaves;
+int numOctaves;
 float noiseScale;
 float lacunarity;
 float gain;
-float amplitude;
+float weightMultiplier;
+float noiseWeight;
+
+float floorOffset;
+float hardFloor;
+float hardFloorWeight;
+
+float4 params;
 
 [numthreads(numThreads, numThreads, numThreads)]
 void GenerateNoise (uint3 id : SV_DispatchThreadID) {
@@ -19,19 +25,29 @@ void GenerateNoise (uint3 id : SV_DispatchThreadID) {
         return;
     }
 
-    float3 pos = chunkCentre + float3(id) * pointSpacing();
+    float3 _pos = chunkCentre + float3(id) * pointSpacing();
+    float _noise = 0;
 
-    fnl_state noise = fnlCreateState();
-    noise.seed = seed;
-    noise.noise_type = FNL_NOISE_OPENSIMPLEX2;
-    noise.fractal_type = FNL_FRACTAL_RIDGED;
     float _frequency = noiseScale / 100;
-    noise.octaves = octaves;
-    noise.frequency = _frequency;
-    noise.lacunarity = lacunarity;
-    noise.gain = gain;
+    float _amplitude = 1;
+    float _weight = 1;
+    for (int i = 0; i < numOctaves; i++) {
+        float n = snoise(_pos * _frequency + offsets[i]);
+        float v = 1 - abs(n);
+        v = v * v;
+        v *= _weight;
+        _weight = max(min(v * weightMultiplier, 1), 0);
+        _noise += v * _amplitude;
+        _amplitude *= gain;
+        _frequency *= lacunarity;
+    }
 
-    float n = fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * amplitude;
-    _weights[indexFromCoord(id.x, id.y, id.z)] = n;
+    float finalVal = -(_pos.y + floorOffset) + _noise * noiseWeight + (_pos.y%params.x) * params.y;
+
+    if (_pos.y < hardFloor) {
+        finalVal += hardFloorWeight;
+    }
+
+    _weights[indexFromCoord(id.x, id.y, id.z)] = finalVal;
 }
 

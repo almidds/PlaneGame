@@ -68,6 +68,12 @@ MonoBehaviour:
   lacunarity: 2
   gain: 0.5
   amplitude: 1
+  weightMultiplier: 1
+  floorOffset: 1
+  noiseWeight: 1
+  hardFloorHeight: 1
+  hardFloorWeight: 1
+  shaderParams: {x: 2, y: 1, z: 0, w: 0}
 --- !u!114 &995236698940315113
 MonoBehaviour:
   m_ObjectHideFlags: 0
