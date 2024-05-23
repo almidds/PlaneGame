@@ -22,7 +22,7 @@ public class NoiseGenerator : MonoBehaviour
         float offsetRange = 1000;
         for (int i = 0; i < numOctaves; i++)
         {
-            offsets[i] = new Vector3 ((float) prng.NextDouble () * 2 - 1, (float) prng.NextDouble () * 2 - 1, (float) prng.NextDouble () * 2 - 1) * offsetRange;
+            offsets[i] = new Vector3((float)prng.NextDouble() * 2 - 1, (float)prng.NextDouble() * 2 - 1, (float)prng.NextDouble() * 2 - 1) * offsetRange;
         }
         var offsetsBuffer = new ComputeBuffer(offsets.Length, sizeof(float) * 3);
         offsetsBuffer.SetData(offsets);
