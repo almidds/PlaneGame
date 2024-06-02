@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class MeshGenerator : MonoBehaviour
 {
-    [SerializeField]
-    private ComputeShader meshGenerator;
+    public ComputeShader meshGenerator;
 
     protected List<ComputeBuffer> buffersToRelease;
     protected List<ComputeBuffer> buffersToCreate;
