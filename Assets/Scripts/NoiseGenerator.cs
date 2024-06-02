@@ -11,8 +11,7 @@ public class NoiseGenerator : MonoBehaviour
 
     ComputeBuffer _weightsBuffer;
 
-    [SerializeField]
-    private ComputeShader noiseGenerator;
+    public ComputeShader noiseGenerator;
 
 
     public float[] GenerateNoise(Vector3 position, int seed, int numOctaves, float noiseScale, float lacunarity, float gain, float floorOffset, float hardFloor, float hardFloorWeight, float weightMultiplier, float noiseWeight, Vector4 shaderParams)
